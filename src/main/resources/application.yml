@@ -9,3 +9,10 @@ spring:
     password: 1234
   jooq:
     sql-dialect: postgres
+
+logging:
+  level:
+    org:
+      jooq:
+        tools:
+          LoggerListener: debug

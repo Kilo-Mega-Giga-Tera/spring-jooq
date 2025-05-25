@@ -1,8 +1,8 @@
 package com;
 
-import java.util.List;
+import static org.jooq.generated.tables.JActor.*;
+
 import org.jooq.DSLContext;
-import org.jooq.generated.tables.Actor;
 import org.jooq.generated.tables.records.ActorRecord;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,20 +15,22 @@ class JooqExampleApplicationTests {
 
   @Test
   public void selectAllActors() {
-    List<ActorRecord> actors = dsl.selectFrom(Actor.ACTOR).fetchInto(ActorRecord.class);
-    for (ActorRecord actor : actors) {
-      System.out.println(actor.getFirstName() + "-" + actor.getLastName());
-    }
+    dsl.selectFrom(ACTOR).fetchInto(ActorRecord.class);
   }
 
   @Test
   public void insertActor() {
     int execute =
-        dsl.insertInto(Actor.ACTOR)
-            .columns(Actor.ACTOR.FIRST_NAME, Actor.ACTOR.LAST_NAME)
-            .values("AHN", "HJ")
+        dsl.insertInto(ACTOR)
+            .columns(ACTOR.FIRST_NAME, ACTOR.LAST_NAME)
+            .values("JA", "VA")
             .execute();
 
     System.out.println(execute);
+  }
+
+  @Test
+  public void selectTenActors() {
+    dsl.selectFrom(ACTOR).limit(10).fetchInto(ActorRecord.class);
   }
 }

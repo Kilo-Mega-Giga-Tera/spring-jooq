@@ -40,12 +40,12 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'org.postgresql:postgresql'
+    runtimeOnly 'org.postgresql:postgresql:42.7.5'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    jooqGenerator 'org.postgresql:postgresql'
+    jooqGenerator project(":jooq-sub")
     jooqGenerator "org.jooq:jooq:${jooqVersion}"
     jooqGenerator "org.jooq:jooq-meta:${jooqVersion}"
 }
@@ -81,7 +81,6 @@ jooq {
                     generate {
                         daos = true
                         records = true
-                        immutablePojos = true
                         fluentSetters = true
                         javaTimeTypes = true
                         deprecated = false
@@ -89,6 +88,7 @@ jooq {
                     target {
                         directory = 'src/generated'
                     }
+                    strategy['name'] = 'jooq.custom.generator.JPrefixGeneratorStrategy'
                 }
             }
         }
