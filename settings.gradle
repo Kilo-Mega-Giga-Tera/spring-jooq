@@ -1,1 +1,3 @@
 rootProject.name = 'jooq-example'
+
+include 'jooq-sub'
