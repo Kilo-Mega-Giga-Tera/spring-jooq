@@ -77,7 +77,15 @@ jooq {
                                 inputSchema = 'public'
                             }
                         }
+
+                        forcedTypes {
+                            forcedType {
+                                userType = 'java.lang.Long'
+                                includeTypes = 'integer'
+                            }
+                        }
                     }
+
                     generate {
                         daos = true
                         records = true
